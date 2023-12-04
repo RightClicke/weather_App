@@ -15,7 +15,12 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription": "Description lorsque l'application utilise votre localisation en cours d'utilisation.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Description lorsque l'application utilise votre localisation en arrière-plan et en cours d'utilisation.",
+        "NSLocationUsageDescription": "Description générale de l'utilisation de la localisation."
+      },
+      "bundleIdentifier": "com.rightclicker.meteoapp"
     },
     "android": {
       "adaptiveIcon": {
@@ -25,6 +30,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "d41d828e-cdab-46ca-ac5d-f68c2fc19307"
+      }
+    },
+    "owner": "rightclicker"
   }
 }

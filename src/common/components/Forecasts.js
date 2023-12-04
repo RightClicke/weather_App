@@ -1,39 +1,28 @@
 import {useEffect, useState} from "react";
-import {format} from "date-fns";
-import {fr} from "date-fns/locale";
-import {ScrollView, Text} from "react-native";
+import {ScrollView, Text, View, StyleSheet} from "react-native";
+import Forecast from "./Forecast";
+import getForecast from "../../Domain/useCases/getForecast";
 
 
-const Forecast = ({data}) => {
-const [forecasts,setForcasts]=useState([])
+const Forecasts = ({data}) => {
+    const [forecasts, setForcasts] = useState([])
     useEffect(() => {
-        const forcastsData = data.list.map((f) => {
-            const dt = new Date(f.dt * 1000)
-            return ({
-                date: dt,
-                hour: dt.getHours(),
-                temp: Math.round(f.main.temp),
-                icon: f.weather[0].icon,
-                name: format(dt, "EEEE", {
-                    local: fr
-                })
-            })
-            setForcasts(forcastsData)
-        })
+        setForcasts(getForecast(data))
     }, [data])
     return (
         <ScrollView
-        horizontal={true}
-        showsHorizontalScrollIndicator={false}
+            className={"px-4"}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
         >
             {
-                forecasts.map((f)=>{
-                    return(
-                        <>
-                            <Text>{f.name}</Text>
-                            <Text>{f.hour}</Text>
-                            <Text>{f.temp}</Text>
-                        </>
+                forecasts && forecasts.map((f, index) => {
+                    return (
+                        <View key={index}>
+                            <View>
+                                <Forecast forecast={f.data[0]} key={index}/>
+                            </View>
+                        </View>
                     )
                 })
             }
@@ -41,4 +30,5 @@ const [forecasts,setForcasts]=useState([])
     )
 }
 
-export default Forecast
+export default Forecasts
+

@@ -1,20 +1,19 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import RenderweatherDataContext from "./src/common/context/RenderweatherDataContext";
+import Home from "./src/pages/Home";
+import Toast from "react-native-toast-message";
+
+
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+
+
+
+    return (
+       <RenderweatherDataContext>
+            <Home/>
+           <Toast/>
+       </RenderweatherDataContext>
+    );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+
